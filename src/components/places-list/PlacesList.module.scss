@@ -1,0 +1,19 @@
+.PlacesList {
+  width: 100%;
+  background-color: rgba(169, 169, 169, 0.4);
+  list-style: none;
+  padding: 0;
+
+  > li {
+    cursor: pointer;
+    @media (hover: hover) {
+      &:hover {
+        background: rgba(169, 169, 169, 0.8);
+      }
+    }
+
+    > p {
+      padding: 5px;
+    }
+  }
+}
