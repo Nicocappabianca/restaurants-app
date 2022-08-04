@@ -26,6 +26,7 @@ const Restaurant: FC = () => {
       {restaurantId && service && (
         <RestaurantDetails mapsService={service} restaurantId={restaurantId} />
       )}
+      <div className={styles["fake-map"]} ref={fakeMapRef}></div>
     </section>
   );
 };
