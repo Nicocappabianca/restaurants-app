@@ -1,5 +1,5 @@
 import { FC, useEffect, useState, useRef } from "react";
-import PlacesList from "../places-list/PlacesList";
+import { PlacesList } from "../../components";
 import styles from "./SearchBar.module.scss";
 import useOutsideClick from "../../hooks/useOutsideClick";
 

@@ -1,0 +1,12 @@
+.CurrentLocationButton {
+  all: unset;
+  padding-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+
+  > img {
+    height: 15px;
+    margin-right: 5px;
+  }
+}
