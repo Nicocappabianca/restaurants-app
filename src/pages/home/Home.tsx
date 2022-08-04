@@ -1,6 +1,10 @@
 import { FC, useState, useEffect } from "react";
 import styles from "./Home.module.scss";
-import { SearchBar, CurrentLocationButton } from "../../components";
+import {
+  SearchBar,
+  CurrentLocationButton,
+  RestaurantsList,
+} from "../../components";
 
 interface HomeProps {
   mapsService: google.maps.places.PlacesService;
@@ -36,7 +40,8 @@ const Home: FC<HomeProps> = ({ mapsService }) => {
   return (
     <section className={styles.Home}>
       <CurrentLocationButton setLocation={setLocation} />
-      <SearchBar mapsService={mapsService} />
+      <SearchBar mapsService={mapsService} setLocation={setLocation} />
+      {restaurants && <RestaurantsList restaurants={restaurants} />}
     </section>
   );
 };

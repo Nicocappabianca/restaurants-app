@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useRef } from "react";
+import { FC, useEffect, useState, useRef, SetStateAction } from "react";
 import { PlacesList } from "../../components";
 import styles from "./SearchBar.module.scss";
 import useOutsideClick from "../../hooks/useOutsideClick";
@@ -7,9 +7,18 @@ let searchTimeout: NodeJS.Timeout;
 
 interface SearchBarProps {
   mapsService: google.maps.places.PlacesService;
+  setLocation: React.Dispatch<
+    SetStateAction<
+      | {
+          latitude: number;
+          longitude: number;
+        }
+      | undefined
+    >
+  >;
 }
 
-const SearchBar: FC<SearchBarProps> = ({ mapsService }) => {
+const SearchBar: FC<SearchBarProps> = ({ mapsService, setLocation }) => {
   const [inputValue, setInputValue] = useState("");
   const [places, setPlaces] = useState<google.maps.places.PlaceResult[] | null>(
     null
@@ -46,7 +55,11 @@ const SearchBar: FC<SearchBarProps> = ({ mapsService }) => {
       />
       {places?.length && showPlacesList && (
         <div className={styles["places-list"]}>
-          <PlacesList places={places} />
+          <PlacesList
+            places={places}
+            setLocation={setLocation}
+            close={() => setShowPlacesList(false)}
+          />
         </div>
       )}
     </div>
