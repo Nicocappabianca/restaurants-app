@@ -6,24 +6,36 @@
 
   .intro {
     display: flex;
-    width: 600px;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    max-width: 100%;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 600px;
+      > * {
+        width: 50%;
+      }
+    }
 
     .text {
       h1 {
         margin: 0;
       }
       p {
-        margin: 10px 0 0 0;
-        max-width: 250px;
+        margin: 10px 0 10px 0;
         font-size: 13px;
+
+        @media (min-width: 768px) {
+          margin: 10px 0 0 0;
+          max-width: 250px;
+        }
       }
     }
 
     > img {
       display: block;
-      width: 300px;
       height: 200px;
       object-fit: cover;
       border-radius: 20px;

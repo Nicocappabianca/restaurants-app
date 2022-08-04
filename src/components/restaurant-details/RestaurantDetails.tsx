@@ -17,6 +17,8 @@ const RestaurantDetails: FC<RestaurantDetailsProps> = ({
     if (data) setRestaurant(data);
   });
 
+  console.log(restaurant);
+
   return (
     <div className={styles.RestaurantDetails}>
       {restaurant && (
