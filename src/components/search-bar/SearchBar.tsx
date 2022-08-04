@@ -14,18 +14,22 @@ const SearchBar: FC<SearchBarProps> = ({ mapsService }) => {
   const [places, setPlaces] = useState<google.maps.places.PlaceResult[] | null>(
     null
   );
+  const [showPlacesList, setShowPlacesList] = useState(false);
   const searchBarRef = useRef(null);
 
-  useOutsideClick(searchBarRef, () => setPlaces(null));
+  useOutsideClick(searchBarRef, () => setShowPlacesList(false));
 
   useEffect(() => {
-    setPlaces(null);
+    setShowPlacesList(false);
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
       mapsService?.findPlaceFromQuery(
         { query: inputValue, fields: ["ALL"] },
         (data) => {
-          if (data) setPlaces(data);
+          if (data) {
+            setPlaces(data);
+            setShowPlacesList(true);
+          }
         }
       );
     }, 700);
@@ -37,9 +41,10 @@ const SearchBar: FC<SearchBarProps> = ({ mapsService }) => {
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
+        onFocus={() => setShowPlacesList(true)}
         placeholder="Find restaurants in..."
       />
-      {places && (
+      {places?.length && showPlacesList && (
         <div className={styles["places-list"]}>
           <PlacesList places={places} />
         </div>
