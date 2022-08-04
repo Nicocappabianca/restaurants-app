@@ -28,7 +28,7 @@ const RestaurantDetails: FC<RestaurantDetailsProps> = ({
               <p>{restaurant.formatted_address}</p>
               <p>
                 Type:&nbsp;
-                {restaurant?.types?.join(" - ")}
+                {restaurant?.types?.join(" - ").replaceAll("_", " ")}
               </p>
             </div>
             <img
