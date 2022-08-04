@@ -15,11 +15,15 @@ const Home: FC<HomeProps> = ({ mapsService }) => {
     latitude: number;
     longitude: number;
   }>();
-  const [restaurants, setRestaurants] =
-    useState<google.maps.places.PlaceResult[]>();
+  const [restaurants, setRestaurants] = useState<
+    google.maps.places.PlaceResult[] | null
+  >(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (location) {
+      setLoading(true);
+      setRestaurants(null);
       const selectedLocation = new google.maps.LatLng(
         location.latitude,
         location.longitude
@@ -33,6 +37,7 @@ const Home: FC<HomeProps> = ({ mapsService }) => {
 
       mapsService.nearbySearch(request, (data) => {
         if (data) setRestaurants(data);
+        setLoading(false);
       });
     }
   }, [location, mapsService]);
@@ -41,6 +46,7 @@ const Home: FC<HomeProps> = ({ mapsService }) => {
     <section className={styles.Home}>
       <CurrentLocationButton setLocation={setLocation} />
       <SearchBar mapsService={mapsService} setLocation={setLocation} />
+      {loading && <p>Loading...</p>}
       {restaurants && <RestaurantsList restaurants={restaurants} />}
     </section>
   );
