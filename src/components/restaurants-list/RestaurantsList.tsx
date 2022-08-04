@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styles from "./RestaurantsList.module.scss";
+import { Link } from "react-router-dom";
 
 interface RestaurantsListProps {
   restaurants: google.maps.places.PlaceResult[];
@@ -20,14 +21,16 @@ const RestaurantsList: FC<RestaurantsListProps> = ({ restaurants }) => {
         .slice(0, 10)
         .map((restaurant) => (
           <li key={restaurant.place_id}>
-            <h4>
-              {Number(restaurant?.name?.length) > 40
-                ? `${restaurant.name?.substring(0, 35)}...`
-                : restaurant.name}
-            </h4>
-            {restaurant.business_status && (
-              <p>{restaurantStatus[restaurant.business_status]}</p>
-            )}
+            <Link to={`/restaurant/${restaurant.place_id}`}>
+              <h4>
+                {Number(restaurant?.name?.length) > 40
+                  ? `${restaurant.name?.substring(0, 35)}...`
+                  : restaurant.name}
+              </h4>
+              {restaurant.business_status && (
+                <p>{restaurantStatus[restaurant.business_status]}</p>
+              )}
+            </Link>
           </li>
         ))}
     </ul>
