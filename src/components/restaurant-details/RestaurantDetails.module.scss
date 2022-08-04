@@ -1,4 +1,5 @@
 .RestaurantDetails {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,7 +14,7 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      width: 600px;
+      width: 100%;
       > * {
         width: 50%;
       }
@@ -28,8 +29,7 @@
         font-size: 13px;
 
         @media (min-width: 768px) {
-          margin: 10px 0 0 0;
-          max-width: 250px;
+          margin: 10px 20px 0 0;
         }
       }
     }

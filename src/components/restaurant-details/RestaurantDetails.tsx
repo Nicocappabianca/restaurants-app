@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { RestaurantReviews } from "../../components";
 import styles from "./RestaurantDetails.module.scss";
 
 interface RestaurantDetailsProps {
@@ -16,8 +17,6 @@ const RestaurantDetails: FC<RestaurantDetailsProps> = ({
   mapsService.getDetails({ placeId: restaurantId }, (data) => {
     if (data) setRestaurant(data);
   });
-
-  console.log(restaurant);
 
   return (
     <div className={styles.RestaurantDetails}>
@@ -41,6 +40,9 @@ const RestaurantDetails: FC<RestaurantDetailsProps> = ({
             />
           </div>
         </>
+      )}
+      {restaurant?.reviews && (
+        <RestaurantReviews reviews={restaurant.reviews} />
       )}
     </div>
   );
