@@ -1,10 +1,11 @@
 import { FC, useState, useEffect, useRef } from "react";
 import styles from "./Restaurant.module.scss";
+import { RestaurantDetails } from "../../components";
 import { useParams } from "react-router-dom";
 import { useJsApiLoader } from "@react-google-maps/api";
 
 const Restaurant: FC = () => {
-  const params = useParams();
+  const { restaurantId } = useParams();
 
   const [service, setService] = useState<google.maps.places.PlacesService>();
   const fakeMapRef = useRef<HTMLDivElement>(null);
@@ -22,7 +23,9 @@ const Restaurant: FC = () => {
 
   return (
     <section className={styles.Restaurant}>
-      <h1>{params.restaurantId}</h1>
+      {restaurantId && service && (
+        <RestaurantDetails mapsService={service} restaurantId={restaurantId} />
+      )}
     </section>
   );
 };

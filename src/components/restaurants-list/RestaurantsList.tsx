@@ -13,7 +13,6 @@ const restaurantStatus = {
 };
 
 const RestaurantsList: FC<RestaurantsListProps> = ({ restaurants }) => {
-  console.log(restaurants);
   return (
     <ul className={styles.RestaurantsList}>
       {restaurants
